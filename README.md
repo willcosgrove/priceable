@@ -14,27 +14,27 @@ And then execute:
 
 ## Usage
 
-Say you have a model, `Llamma`.  You can buy `Llamma`s for a `cost`.  Let's add the `cost` to the `Llamma` model.
+Say you have a model, `Llama`.  You can buy `Llama`s for a `cost`.  Let's add the `cost` to the `Llama` model.
 
-    $ rails g migration add_cost_to_llammas cost_in_cents:integer
+    $ rails g migration add_cost_to_llamas cost_in_cents:integer
     $ rake db:migrate
 
 Now we just need to tell Rails that the `cost` field is priceable
 
-    # app/models/llamma.rb
+    # app/models/llama.rb
 
-    class Llamma < ActiveRecord::Base
+    class Llama < ActiveRecord::Base
       priceable :cost
     end
 
 And now lets check it out
 
     $ rails c
-    >> llamma = Llamma.last
-    >> llamma.cost # => nil
-    >> llamma.cost = 100
-    >> llamma.cost_in_cents # => 10000
-    >> llamma.cost # => 100
+    >> llama = Llama.last
+    >> llama.cost # => nil
+    >> llama.cost = 100
+    >> llama.cost_in_cents # => 10000
+    >> llama.cost # => 100
 
 Isn't that special.  So go, and add prices easily to your models, with Priceable. 
 
