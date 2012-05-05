@@ -10,7 +10,7 @@ module Priceable
         send("#{price_field}#{suffix}".to_sym) / 100.0
       end  
       define_method "#{price_field}=".to_sym do |new_price|
-        send("#{price_field}#{suffix}=".to_sym, new_price * 100)
+        send("#{price_field}#{suffix}=".to_sym, new_price.to_f * 100)
       end
     end
     if self._accessible_attributes?
