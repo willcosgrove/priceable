@@ -6,7 +6,9 @@ Easily manage prices in your Rails application
 
 Add this line to your application's Gemfile:
 
-    gem 'priceable'
+```ruby
+gem 'priceable'
+```
 
 And then execute:
 
@@ -21,26 +23,32 @@ Say you have a model, `Llama`.  You can buy `Llama`s for a `cost`.  Let's add th
 
 Now we just need to tell Rails that the `cost` field is priceable
 
-    # app/models/llama.rb
+```ruby
+# app/models/llama.rb
 
-    class Llama < ActiveRecord::Base
-      priceable :cost
-    end
+class Llama < ActiveRecord::Base
+  priceable :cost
+end
+```
 
 And now lets check it out
 
-    $ rails c
-    >> llama = Llama.last
-    >> llama.cost # => nil
-    >> llama.cost = 100
-    >> llama.cost_in_cents # => 10000
-    >> llama.cost # => 100
+```ruby
+$ rails c
+>> llama = Llama.last
+>> llama.cost # => nil
+>> llama.cost = 100
+>> llama.cost_in_cents # => 10000
+>> llama.cost # => 100
+```
 
 Isn't that special.  So go, and add prices easily to your models, with Priceable. 
 
 PS: `priceable` can take more than one field at a time, so go ahead and load it up like a baked potato.
 
-    priceable :retail_price, :employee_price, :cost
+```ruby
+priceable :retail_price, :employee_price, :cost
+```
 
 ## Contributing
 
