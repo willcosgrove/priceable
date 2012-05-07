@@ -31,10 +31,9 @@ class Llama < ActiveRecord::Base
 end
 ```
 
-And now lets check it out
+And now lets check it out in the console
 
 ```ruby
-$ rails c
 >> llama = Llama.last
 >> llama.cost # => nil
 >> llama.cost = 100
