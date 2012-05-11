@@ -9,9 +9,13 @@ describe Priceable do
   end
 
   it "should create a setter method" do
-    llama.price = 200
-    llama.price_in_cents.should == 20000
+    llama.price = 200.10
+    llama.price_in_cents.should == 20010
   end
+
+  it "should return 0.0 if nil" do
+    llama.price.should == 0.0
+  end  
 
   it "should set it as attr_accessible" do
     Llama.accessible_attributes.to_a.should include("price")
