@@ -1,7 +1,7 @@
 require "priceable/version"
 
 module Priceable
-  SUFFIXES = ["_in_cents", "_in_pennies"]
+  SUFFIXES = ["_in_cents", "_in_pennies", "_as_integer"]
   def priceable(*price_fields)
     price_fields.each do |price_field|
       suffix = SUFFIXES.detect { |suffix| self.attribute_method? "#{price_field}#{suffix}".to_sym }
