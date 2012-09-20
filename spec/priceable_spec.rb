@@ -11,6 +11,9 @@ describe Priceable do
   it "should create a setter method" do
     llama.price = 200.10
     llama.price_in_cents.should == 20010
+
+    llama.price = 285.53
+    llama.price_in_cents.should == 28553
   end
 
   it "should return 0.0 if nil" do
