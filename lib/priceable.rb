@@ -17,9 +17,13 @@ module Priceable
         send("#{price_field}#{suffix}=".to_sym, (new_price.to_f * 100).round)
       end
     end
-    if self._accessible_attributes?
-      attr_accessible *price_fields
+
+    unless Rails::VERSION::MAJOR == 4 && !defined?(ProtectedAttributes)
+      if self._accessible_attributes?
+        attr_accessible *price_fields
+      end
     end
+    
   end
 end
 
