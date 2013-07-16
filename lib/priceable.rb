@@ -12,7 +12,7 @@ module Priceable
         else
           0.0
         end
-      end  
+      end
       define_method "#{price_field}=".to_sym do |new_price|
         send("#{price_field}#{suffix}=".to_sym, (new_price.to_f * 100).round)
       end
@@ -23,7 +23,7 @@ module Priceable
         attr_accessible *price_fields
       end
     end
-    
+
   end
 end
 
