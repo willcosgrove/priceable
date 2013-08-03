@@ -2,10 +2,11 @@ require "priceable/version"
 
 module Priceable
   SUFFIXES = ["_in_cents", "_in_pennies", "_as_integer"]
+
   def priceable(*price_fields)
     price_fields.each do |price_field|
       suffix = SUFFIXES.detect { |suffix| self.attribute_method? "#{price_field}#{suffix}".to_sym }
-      raise ArgumentError, "Unable to find valid database field for `#{price_field}'" unless suffix
+      raise ArgumentError, "Unable to find valid database field for `#{price_field}#{suffix}'" unless suffix
       define_method price_field do
         unless send("#{price_field}#{suffix}".to_sym).nil?
           send("#{price_field}#{suffix}".to_sym) / 100.0
