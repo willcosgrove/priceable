@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.name          = "priceable"
   gem.require_paths = ["lib"]
   gem.version       = Priceable::VERSION
+  gem.license       = 'MIT'
 
   gem.add_development_dependency('rails')
   gem.add_development_dependency('rspec')
