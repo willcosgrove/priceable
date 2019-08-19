@@ -15,6 +15,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Priceable::VERSION
 
+  gem.add_dependency("activerecord", '>= 3.0.0')
+
   gem.add_development_dependency('rails')
   gem.add_development_dependency('rspec')
 end
