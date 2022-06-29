@@ -4,6 +4,7 @@ require "priceable/version"
 
 module Priceable
   SUFFIXES = ["_in_cents", "_in_pennies", "_as_integer"].freeze
+  PRICE_REGEX = /[^\d\.]/.freeze
   
   def priceable(*price_fields)
     price_fields.each do |price_field|
@@ -19,6 +20,8 @@ module Priceable
       end
       
       define_method "#{price_field}=" do |new_price|
+        new_price = new_price.gsub(PRICE_REGEX, '') if new_price.is_a? String
+
         send("#{price_field}#{suffix}=", (new_price.to_f * 100).round)
       end
     end
