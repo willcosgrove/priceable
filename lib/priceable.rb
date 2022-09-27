@@ -12,17 +12,22 @@ module Priceable
       raise ArgumentError, "Unable to find valid database field for `#{price_field}'" unless suffix
       
       define_method price_field do
-        unless send("#{price_field}#{suffix}").nil?
-          send("#{price_field}#{suffix}") / 100.0
-        else
-          0.0
+        unless (cents = send("#{price_field}#{suffix}")).nil?
+          cents.fdiv(100)
         end
       end
       
       define_method "#{price_field}=" do |new_price|
-        new_price = new_price.gsub(PRICE_REGEX, '') if new_price.is_a? String
+        value_to_set =
+          case new_price
+          when NilClass then nil
+          when String
+            (new_price.gsub(PRICE_REGEX, '').to_f * 100).round
+          else
+            (new_price.to_f * 100).round
+          end
 
-        send("#{price_field}#{suffix}=", (new_price.to_f * 100).round)
+        send("#{price_field}#{suffix}=", value_to_set)
       end
     end
   end
