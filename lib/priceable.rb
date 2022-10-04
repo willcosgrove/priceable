@@ -6,15 +6,16 @@ module Priceable
   SUFFIXES = ["_in_cents", "_in_pennies", "_as_integer"].freeze
   PRICE_REGEX = /[^\d\.]/.freeze
   
-  def priceable(*price_fields)
+  def priceable(*price_fields, default: nil)
     price_fields.each do |price_field|
       suffix = SUFFIXES.detect { |suffix| attribute_method? "#{price_field}#{suffix}" }
       raise ArgumentError, "Unable to find valid database field for `#{price_field}'" unless suffix
       
       define_method price_field do
-        unless (cents = send("#{price_field}#{suffix}")).nil?
-          cents.fdiv(100)
-        end
+        cents = send("#{price_field}#{suffix}")
+        return default if cents.nil?
+
+        cents.fdiv(100)
       end
       
       define_method "#{price_field}=" do |new_price|
